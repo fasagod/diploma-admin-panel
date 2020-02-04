@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="loginForm">
     <el-form
       :model="loginForm"
       status-icon
@@ -15,7 +15,7 @@
         <el-input type="password" v-model="loginForm.pass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('loginForm')">Login</el-button>
+        <el-button type="primary" :disabled="!isFormValid" v-on:click="login()">Login</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -26,20 +26,31 @@ import Vue from 'vue';
 
 export default Vue.extend({
   data() {
-      const validateUsername = (rule: any, value: any, callback: any) => {
+      let validUsername: boolean = false;
+      let validPassword: boolean = false;
+      const validateUsername = (rule: any, value: string, callback: any) => {
         if (value === '') {
           callback(new Error('Please input the username'));
+        } else if (value.length <= 4) {
+          callback(new Error('Username must be 4+ char'));
         } else {
+          validUsername = true;
           callback();
         }
       };
-      const validatePass = (rule: any, value: any, callback: any) => {
+      const validatePass = (rule: any, value: string, callback: any) => {
         if (value === '') {
           callback(new Error('Please input the password again'));
+        } else if (value.length < 6) {
+          callback(new Error('Pass must be 6+ char'));
         } else {
+          validPassword = true;
           callback();
         }
       };
+      function isFormValid(): boolean {
+        return (validUsername && validPassword);
+      }
       return {
         labelPosition: 'right',
         loginForm: {
@@ -50,23 +61,22 @@ export default Vue.extend({
           username: [
             { validator: validateUsername, trigger: 'blur' },
           ],
-          checkPass: [
+          pass: [
             { validator: validatePass, trigger: 'blur' },
           ],
         },
       };
     },
     methods: {
-      submitForm(formName: string) {
-        (this.$refs[formName]as any).validate((valid: any) => {
-          if (valid) {
-            alert('submit!');
-          } else {
-            alert('error submit!!');
-            return false;
-          }
-        });
+      login() {
+        alert('login');
       },
     },
 });
 </script>
+
+<style scoped>
+div.loginForm {
+  margin: 20% 35% 15% 35%;
+}
+</style>
