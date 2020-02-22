@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Login from '../components/Login.vue';
+import Sensors from '../components/Sensors.vue';
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,11 @@ const routes = [
     path: '/Info',
     name: 'Info',
     component: () => import(/* webpackChunkName: "about" */ '../components/Info.vue'),
+  },
+  {
+    path: '/Sensors',
+    name: 'sensors',
+    component: Sensors,
   },
 ];
 
