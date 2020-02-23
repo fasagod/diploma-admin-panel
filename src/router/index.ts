@@ -8,19 +8,15 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'login',
-    component: Login,
+    name: 'sensors',
+    component: Sensors,
   },
   {
     path: '/Info',
     name: 'Info',
     component: () => import(/* webpackChunkName: "about" */ '../components/Info.vue'),
   },
-  {
-    path: '/Sensors',
-    name: 'sensors',
-    component: Sensors,
-  },
+  
 ];
 
 const router = new VueRouter({

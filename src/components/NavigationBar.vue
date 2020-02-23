@@ -9,8 +9,7 @@
       active-text-color="#ffd04b"
       :router="true"
     >
-      <el-menu-item index="/">Home</el-menu-item>
-      <el-menu-item index="/Sensors">Sensors</el-menu-item>
+      <el-menu-item index="/">Sensors</el-menu-item>
       <el-menu-item index="/Info">Info</el-menu-item>
     </el-menu>
   </div>
